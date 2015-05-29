@@ -4,6 +4,11 @@
  * Displays Dartmouth course data, including enrollment. Easily extendible to
  * provide email notification on course availability detection.
  *
+ * Return values:
+ *   0 if class has room
+ *   1 if class is full
+ *  -1 if the program has an error
+ *
  * Usage:   phantomjs checkClass.js [DEPARMENT] [COURSE NUMBER]
  * Example: phantomjs checkClass.js EARS 6
  *
