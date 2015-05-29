@@ -22,7 +22,8 @@ function classHasSpaceHandler(results, page) {
 
   // // MANDRILL EMAIL TEMPLATE
   // // If you would like to have an email sent when course availabilities is
-  // // detected, uncomment the code below, register for a free account
+  // // detected, uncomment the code below, register for a free account, and
+  // // fill in YOUR_API_KEY, YOUR@EMAIL.HERE, and RECIPIENT@EMAIL.HERE
   // page.evaluate(function(title, enrl, lim) {
   //   console.log("sending email");
   //   $.ajax({
