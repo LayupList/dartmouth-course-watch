@@ -13,6 +13,11 @@ Afterwards, clone the repository and test it out!
  phantomjs checkClass.js [DEPARMENT] [COURSE NUMBER]
 ```
 
+## Extensions
+To extend the script to perform additional actions when an opening in the class is detected, modify the `classHasSpaceHandler` in checkClass.js.
+
+If you would like to send an email notification, see "Send email notification when there is space in the class" for a simple solution.
+
 ## Usage / Use Cases
 
 ### Look up course information
@@ -20,12 +25,39 @@ Usage   `phantomjs checkClass.js [DEPARMENT] [COURSE NUMBER]`
 
 Example `phantomjs checkClass.js cosc 1`
 
+Example output:
+```
+Course Information:
+term: 201509
+crn: 96500
+subj: COSC
+num: 001
+sec: 01
+title: Intro Programming&Computatn
+xlist:  
+period: 12
+room: 
+building: 
+instructor: Hany Farid
+wc:  
+dist: TLA
+lim: 180
+enrl: 96
+
+THERE IS ROOM IN THE CLASS!!! 96/180
+```
 
 ### Continuous lookup of course information
+You can wrap the lookup in a bash loop to run the program continuously. This, combined with some extension in `classHasSpaceHandler` can allow you to receive real-time notifications when space opens up in a class.
+
+`while :; do phantomjs checkClass.js [DEPARTMENT] [COURSE NUMBER]; sleep [AMOUNT OF TIME TO SLEEP]; done`
 
 ### Send email notification when there is space in the class
+1. Uncomment the "MANDRILL EMAIL TEMPLATE" in `classHasSpaceHandler`
+2. Create a free account and generate an API key from [Mandrill](http://mandrill.com/))
+3. Replace `YOUR_API_KEY`, `YOUR@EMAIL.HERE`, `RECIPIENT@EMAIL.HERE`, with the API key, the FROM email and the TO email, respectively
 
 ### Other Use Cases
-
+You can modify `classHasSpaceHandler` to do whatever you like. The commented-out example shows a method for sending email, but you could feasibly do things like send a text, write to a database, etc.
 
 
