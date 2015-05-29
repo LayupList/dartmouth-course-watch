@@ -136,7 +136,7 @@ page.open(SERVER, 'post', data, function(status) {
     }
 
     // check if class has space
-    if (results.lim > results.enrl) {
+    if (parseInt(results.lim) > parseInt(results.enrl)) {
       console.log("\nTHERE IS ROOM IN THE CLASS!!! " + results.enrl
           + "/" + results.lim);
       classHasSpaceHandler(results, page);
