@@ -65,7 +65,7 @@ var args = system.args;
 if (args.length !== 3) {
   console.log("Usage:   phantomjs" + args[0] + " [DEPARMENT] [COURSE NUMBER]");
   console.log("Example: phantomjs" + args[0] + " EARS 6");
-  phantom.exit();
+  phantom.exit(-1);
 }
 
 var page = require('webpage').create(),
