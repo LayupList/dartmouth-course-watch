@@ -55,8 +55,8 @@ function classHasSpaceHandler(results, page) {
 
 // constants
 var NUM_DATA_POINTS = 15,
-    SERVER = 'https://banner.dartmouth.edu/dart/groucho/timetable.course_quicksearch',
-    JQUERY = 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js';
+SERVER = 'https://banner.dartmouth.edu/dart/groucho/timetable.course_quicksearch',
+JQUERY = 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js';
 
 // get command line args
 var system = require('system');
@@ -70,7 +70,7 @@ if (args.length !== 3) {
 }
 
 var page = require('webpage').create(),
-    data = 'classyear=2008&subj=' + args[1] + '&crsenum=' + args[2];
+data = 'classyear=2008&subj=' + args[1] + '&crsenum=' + args[2];
 
 // ERROR HANDLERS
 phantom.onError = function(msg, trace) {
@@ -137,10 +137,15 @@ page.open(SERVER, 'post', data, function(status) {
     }
 
     // check if class has space
-    if (parseInt(results.lim) > parseInt(results.enrl)) {
+    var enrlimit = parseInt(results.lim);
+    if (enrlimit > parseInt(results.enrl)) {
       console.log("\nTHERE IS ROOM IN THE CLASS!!! " + results.enrl
-          + "/" + results.lim);
+        + "/" + results.lim);
       classHasSpaceHandler(results, page);
+      phantom.exit(0); 
+    } else if (isNaN(enrlimit)) {
+      console.log("Class does not have an enrollment cap (at least not one" +
+        " that's shown on the ORC). Go ahead and enroll!");
       phantom.exit(0);
     } else {
       console.log("\nThe class is full. " + results.enrl + "/" + results.lim);
@@ -148,4 +153,4 @@ page.open(SERVER, 'post', data, function(status) {
     }
 
   });
-});
+});   
