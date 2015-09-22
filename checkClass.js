@@ -54,7 +54,7 @@ function classHasSpaceHandler(results, page) {
 }
 
 // constants
-var NUM_DATA_POINTS = 15,
+var NUM_DATA_POINTS = 17,
     SERVER = 'https://banner.dartmouth.edu/dart/groucho/timetable.course_quicksearch',
     JQUERY = 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js';
 
