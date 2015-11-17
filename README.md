@@ -2,9 +2,9 @@
 
 ![Example image](https://raw.githubusercontent.com/cheniel/dartmouth-course-watch/master/example.png)
 
-A command-line script written using [PhantomJS](http://phantomjs.org/) that parses the Dartmouth academic timetable to look up courses, with an emphasis on checking if there is space in the course, allowing students to enroll.
+A command-line script written using [PhantomJS](http://phantomjs.org/) that crawls the Dartmouth academic timetable and shows if there is space in a course.
 
-The script is easily extendible. At its simplest it provides users a quick lookup of course data (title, period, room, building, instructor, distributive requirements, enrollment limit and current enrollment). With some configuration (generating an free API key from [Mandrill](http://mandrill.com/)), you can have it email upon detecting enrollment opportunities.
+The script is easily extendible. At its simplest it displays the current enrollment and limit info, producing a terminal beep if there is space. With some configuration (generating an free API key from [Mandrill](http://mandrill.com/)), you can have it email upon detecting enrollment opportunities.
 
 ## Installation
 dartmouth-course-watch requires [PhantomJS](http://phantomjs.org/). Install and make sure the binary is in your path.
@@ -30,28 +30,15 @@ Example `phantomjs check_class.js cosc 1`
 
 Example output:
 ```
-Course Information:
-term: 201509
-crn: 96500
-subj: COSC
-num: 001
-sec: 01
-title: Intro Programming&Computatn
-xlist:  
-period: 12
-room:
-building:
-instructor: Hany Farid
-wc:  
-dist: TLA
-lim: 180
-enrl: 96
-
-THERE IS ROOM IN THE CLASS!!! 96/180
+4:20:35 PM EST | 114/180 | THERE IS ROOM IN THE CLASS!!!
+```
+or
+```
+4:21:56 PM EST | 180/180 | The class is full.
 ```
 
 ### Continuous lookup of course information
-You can wrap the lookup in a bash loop to run the program continuously. This, combined with some extension in `classHasSpaceHandler` can allow you to receive real-time notifications when space opens up in a class.
+You can wrap the lookup in a bash loop to run the program continuously. This, combined with some extension in `classHasSpaceHandler` can allow you to receive real-time notifications when space opens up in a class. It'll also produce a terminal beep.
 
 `while :; do phantomjs check_class.js [DEPARTMENT] [COURSE NUMBER]; sleep [AMOUNT OF TIME TO SLEEP]; done`
 

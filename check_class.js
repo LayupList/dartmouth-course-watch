@@ -16,10 +16,11 @@
  * Github: cheniel
  */
 
+ var verbose = false;
+
 // called when the class has space. Fill this out if you like!
 // send an email, modify a database, etc...
 function classHasSpaceHandler(results, page) {
-  console.log('\u0007'); // terminal beep
 
   // // MANDRILL EMAIL TEMPLATE
   // // If you would like to have an email sent when course availabilities is
@@ -132,18 +133,30 @@ page.open(SERVER, 'post', data, function(status) {
     }
 
     // print data
-    console.log("Course Information:");
-    for(var dataType in results) {
-      console.log(dataType + ": " + results[dataType]);
+    if (verbose) {
+      console.log("Course Information:");
+      for(var dataType in results) {
+        console.log(dataType + ": " + results[dataType]);
+      }
     }
 
-    // check if class has space
-    if (parseInt(results.lim) > parseInt(results.enrl)) {
-      console.log((new Date()).toLocaleTimeString() + " | THERE IS ROOM IN THE CLASS!!! " + results.enrl + "/" + results.lim);
+    if (results.term === "") {
+      console.log("Could not find specified course for next term.");
+      phantom.exit(-1);
+    }
+
+    if (!results.lim) {
+      console.log("There is no limit for this class.");
+      phantom.exit(1);
+    } else if (!results.enrl) {
+      console.log("No enrollment information can be found for this class.");
+      phantom.exit(1);
+    } else if (parseInt(results.lim) > parseInt(results.enrl)) {
+      console.log((new Date()).toLocaleTimeString() + " | " + results.enrl + "/" + results.lim + " | " + "THERE IS ROOM IN THE CLASS!!! " + "\u0007");
       classHasSpaceHandler(results, page);
       phantom.exit(0);
     } else {
-      console.log((new Date()).toLocaleTimeString() + " | The class is full. " + results.enrl + "/" + results.lim);
+      console.log((new Date()).toLocaleTimeString() + " | " + results.enrl + "/" + results.lim + " | " + "The class is full. ");
       phantom.exit(1);
     }
 
