@@ -139,12 +139,11 @@ page.open(SERVER, 'post', data, function(status) {
 
     // check if class has space
     if (parseInt(results.lim) > parseInt(results.enrl)) {
-      console.log("\nTHERE IS ROOM IN THE CLASS!!! " + results.enrl
-          + "/" + results.lim);
+      console.log((new Date()).toLocaleTimeString() + " | THERE IS ROOM IN THE CLASS!!! " + results.enrl + "/" + results.lim);
       classHasSpaceHandler(results, page);
       phantom.exit(0);
     } else {
-      console.log("\nThe class is full. " + results.enrl + "/" + results.lim);
+      console.log((new Date()).toLocaleTimeString() + " | The class is full. " + results.enrl + "/" + results.lim);
       phantom.exit(1);
     }
 
