@@ -9,8 +9,8 @@
  *   1 if class is full
  *  -1 if the program has an error
  *
- * Usage:   phantomjs checkClass.js [DEPARMENT] [COURSE NUMBER]
- * Example: phantomjs checkClass.js EARS 6
+ * Usage:   phantomjs check_class.js [DEPARMENT] [COURSE NUMBER]
+ * Example: phantomjs check_class.js EARS 6
  *
  * Created by Daniel Chen '16
  * Github: cheniel
