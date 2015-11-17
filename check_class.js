@@ -19,6 +19,7 @@
 // called when the class has space. Fill this out if you like!
 // send an email, modify a database, etc...
 function classHasSpaceHandler(results, page) {
+  console.log('\u0007'); // terminal beep
 
   // // MANDRILL EMAIL TEMPLATE
   // // If you would like to have an email sent when course availabilities is
